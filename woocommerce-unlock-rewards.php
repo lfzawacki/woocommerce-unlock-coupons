@@ -46,6 +46,7 @@ class WC_Unlock_Rewards {
 
       // Register the integration.
       add_filter( 'woocommerce_integrations', array( $this, 'add_integration' ) );
+
     } else {
       // throw an admin error if you like
     }
