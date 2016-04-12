@@ -148,6 +148,18 @@ class WC_Unlock_Rewards_Integration extends WC_Integration {
         'desc_tip'          => true,
         'default'           => '',
         'options'           => $this->months
+      ),
+
+      'generate_coupons_button' => array(
+        'title'             => __( 'Gerar Cupons', 'woocommerce-unlock-rewards' ),
+        'type'              => 'button',
+        'custom_attributes' => array(
+          'onclick' => "location.href='/wp-admin/admin.php?page=generate-coupons'"
+        ),
+        'class'             => "button-primary",
+        'default'             => 'Gerar Cupons',
+        'description'       => __( 'Gerar Cupons', 'woocommerce-unlock-rewards' ),
+        'desc_tip'          => true
       )
     );
   }
@@ -306,11 +318,6 @@ class WC_Unlock_Rewards_Integration extends WC_Integration {
    * @see process_admin_options()
    */
   public function sanitize_settings( $settings ) {
-    // We're just going to make the api key all upper case characters since that's how our imaginary API works
-    // if ( isset( $settings ) &&
-    //      isset( $settings['api_key'] ) ) {
-    //   $settings['api_key'] = strtoupper( $settings['api_key'] );
-    // }
     return $settings;
   }
 
@@ -319,17 +326,7 @@ class WC_Unlock_Rewards_Integration extends WC_Integration {
    * @see display_errors()
    */
   public function display_errors( ) {
-
-    // loop through each error and display it
-//    foreach ( $this->errors as $key => $value ) {
-//      ?>
-//      <div class="error">
-//        <p><?php _e( 'Looks like you made a mistake with the ' . $value . ' field. Make sure it isn&apos;t longer than 20 characters', 'woocommerce-unlock-rewards' ); ?></p>
-//      </div>
-//      <?php
-//    }
   }
-
 
 }
 
