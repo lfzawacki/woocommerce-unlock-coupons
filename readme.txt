@@ -1,19 +1,22 @@
-=== WooCommerce Integration Demo ===
-Contributors: bftrick
-Tags: email, woocommerce, integration,
-Requires at least: 3.9
-Tested up to: 3.9
-Stable tag: 1.0
-License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+=== WooCommerce Unlock.fund Coupons ===
 
-An example plugin that shows you how to create a new WooCommerce integration.
+Contributors: lfzawacki
+Tags: unlock, woocommerce, integration, moip, coupons
+Requires at least: 3.9
+Tested up to: 4.4
+Stable tag: 1.0
+License: AGPL v3 or later
+License URI: https://www.gnu.org/licenses/agpl-3.0.en.html
+
+Recompensando seus apoiadores com produtos na sua loja
 
 == Description ==
 
-An example plugin that shows you how to create a new WooCommerce integration.
+Usando sua conta do https://unlock.fund/ e um número de iniciativa este plugin cria uma lista de cupons mensal para
+cada um dos seus apoiadores.
 
 == Changelog ==
 
-= 1.0 =
-* Launch!
+= 0.1 =
+
+* Primeira versão, geração simples de cupons

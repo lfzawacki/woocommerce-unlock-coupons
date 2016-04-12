@@ -1,11 +1,11 @@
 <?php
 /**
  * Plugin Name: Unlock.fund Reward Coupons
- * Plugin URI: https://github.com/BFTrick/woocommerce-integration-demo
- * Description: Recompensando seus apoiadores com produtos na sua loja	
+ * Plugin URI: https://github.com/lfzawacki/woocommerce-unlock-coupons
+ * Description: Recompensando seus apoiadores Unlock com produtos na sua loja
  * Author: Lucas Fialho Zawacki
- * Author URI: http://speakinginbytes.com/
- * Version: 1.0
+ * Author URI: https://github.com/lfzawacki/woocommerce-unlock-coupons
+ * Version: 0.1
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
