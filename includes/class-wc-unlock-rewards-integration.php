@@ -48,6 +48,7 @@ class WC_Unlock_Rewards_Integration extends WC_Integration {
     $this->project_id       = $this->get_option( 'project_id');
     $this->secret_word      = $this->get_option( 'secret_word');
     $this->force_month      = $this->get_option( 'force_month');
+    $this->multiplier       = $this->get_option( 'multiplier');
 
     // Actions.
     add_action( 'woocommerce_update_options_integration_' .  $this->id, array( $this, 'process_admin_options' ) );
@@ -141,6 +142,14 @@ class WC_Unlock_Rewards_Integration extends WC_Integration {
         'default'           => ''
       ),
 
+      'multiplier' => array(
+        'title'             => __( 'Multiplicador (em %)', 'woocommerce-unlock-rewards' ),
+        'type'              => 'number',
+        'description'       => __( 'Por quanto multiplicar o valor do cupon. Sem o sinal de %!', 'woocommerce-unlock-rewards' ),
+        'desc_tip'          => true,
+        'default'           => 100
+      ),
+
       'force_month' => array(
         'title'             => __( 'Forçar mês', 'woocommerce-unlock-rewards' ),
         'type'              => 'select',
@@ -172,7 +181,7 @@ class WC_Unlock_Rewards_Integration extends WC_Integration {
     $url_base = "https://unlock.fund/pt-BR/";
 
     $dir = DOC_ROOT."/ctemp";
-    $path = $dir;//build_unique_path($dir);
+    $path = $dir;
 
     $cookie_file_path = $path."/cookie.txt";
 
@@ -228,6 +237,7 @@ class WC_Unlock_Rewards_Integration extends WC_Integration {
 
   public function create_new_user_coupon($name, $email, $month, $amount) {
 
+    $mult = $this->multiplier / 100.0;
     $coupon_code = sha1($this->secret_word . $month . $email . $amount);
     $discount_type = 'fixed_cart'; // Type: fixed_cart, percent, fixed_product, percent_product
 
@@ -247,7 +257,7 @@ class WC_Unlock_Rewards_Integration extends WC_Integration {
 
       // Add meta
       update_post_meta( $new_coupon_id, 'discount_type', $discount_type );
-      update_post_meta( $new_coupon_id, 'coupon_amount', $amount );
+      update_post_meta( $new_coupon_id, 'coupon_amount', $amount * $mult );
       update_post_meta( $new_coupon_id, 'individual_use', 'yes' );
       update_post_meta( $new_coupon_id, 'product_ids', '' );
       update_post_meta( $new_coupon_id, 'exclude_product_ids', '' );
@@ -266,9 +276,9 @@ class WC_Unlock_Rewards_Integration extends WC_Integration {
 
     echo("<h1>Gerando cupons ...</h1>");
 
-    if ($working == 'stopped' &&
-       ($this->force_month != '0' || ($this->force_month == '0' && $last_generated != getdate()['mon']) )
-     )
+    if ($working == 'stopped')// &&
+       // ($this->force_month != '0' || ($this->force_month == '0' && $last_generated != getdate()['mon']) )
+     //)
     {
       update_option('unlock-rewards-working', 'working');
 
@@ -300,9 +310,9 @@ class WC_Unlock_Rewards_Integration extends WC_Integration {
       update_option('unlock-rewards-working', 'stopped');
 
       // Write last-generated month to database
-      if ($month == getdate()['mon']) {
-        update_option('unlock-rewards-last-generated', getdate()['mon']);
-      }
+      // if ($month == getdate()['mon']) {
+      //   update_option('unlock-rewards-last-generated', getdate()['mon']);
+      // }
 
     }
     else
