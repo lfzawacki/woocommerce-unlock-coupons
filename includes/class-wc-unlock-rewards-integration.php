@@ -221,6 +221,12 @@ class WC_Unlock_Rewards_Integration extends WC_Integration {
 
   public function create_new_user_coupon($name, $email, $month, $amount) {
 
+    // 24 * 30 * 60 * 60
+    $month_in_seconds = 2592000;
+    $expiry_date = strptime($month_in_seconds + current_time('timestamp'), '%s');
+
+    $expiry_date = ($expiry_date['tm_year'] + 1900) . '-' . ($expiry_date['tm_mon'] + 1) . '-' . ($expiry_date['tm_mday']);
+
     $mult = $this->multiplier / 100.0;
     $coupon_code = sha1($this->secret_word . $month . $email . $amount);
     $discount_type = 'fixed_cart'; // Type: fixed_cart, percent, fixed_product, percent_product
@@ -246,7 +252,7 @@ class WC_Unlock_Rewards_Integration extends WC_Integration {
       update_post_meta( $new_coupon_id, 'product_ids', '' );
       update_post_meta( $new_coupon_id, 'exclude_product_ids', '' );
       update_post_meta( $new_coupon_id, 'usage_limit', '1' );
-      update_post_meta( $new_coupon_id, 'expiry_date', '' );
+      update_post_meta( $new_coupon_id, 'expiry_date', $expiry_date );
       update_post_meta( $new_coupon_id, 'apply_before_tax', 'yes' );
       update_post_meta( $new_coupon_id, 'free_shipping', 'no' );
     }
