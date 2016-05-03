@@ -59,47 +59,31 @@ class WC_Unlock_Rewards_Integration extends WC_Integration {
     // Cronjob action to generate all the monthly coupons
     // add_action( 'generate_monthly_coupons', array($this, 'generate_coupons') );
 
-    add_filter( 'plugin_action_links', array( $this, 'plugin_action_links'), 10, 2 );
-    add_action( 'admin_menu', array( $this, 'plugin_admin_menu') );
+    add_action( 'generate_coupons_menu', array( $this, 'plugin_generate_coupons_menu') );
+
+    add_action( 'admin_menu', array( $this, 'plugin_generate_coupons_menu') );
 
     // if ( ! wp_next_scheduled( 'generate_monthly_coupons' ) ) {
     //   wp_schedule_event( time(), 'hourly', 'generate_coupons' );
     // }
   }
 
-  function plugin_admin_menu() {
+  public function plugin_generate_coupons_menu() {
     $page_title = 'Generate Coupons';
     $menu_title = 'Generate Coupons';
     $capability = 'manage_options';
     $menu_slug = 'generate-coupons';
-    $function = array($this, 'plugin_settings');
+    $function = array($this, 'plugin_generate_coupons');
 
     add_options_page($page_title, $menu_title, $capability, $menu_slug, $function);
   }
 
-  function plugin_settings() {
+  public function plugin_generate_coupons() {
     if (!current_user_can('manage_options')) {
       wp_die('Seje um admin por favor');
     }
 
-    // Here is where you could start displaying the HTML needed for the settings
-    // page, or you could include a file that handles the HTML output for you.
     $this->generate_coupons();
-  }
-
-  function plugin_action_links($links, $file) {
-    static $this_plugin;
-
-    if (!$this_plugin) {
-        $this_plugin = plugin_basename(__FILE__);
-    }
-
-    if ($file == $this_plugin) {
-        $settings_link = '<a href="' . get_bloginfo('wpurl') . '/wp-admin/admin.php?page=generate-coupons">Gerar cupons</a>';
-        array_unshift($links, $settings_link);
-    }
-
-    return $links;
   }
 
   /**
