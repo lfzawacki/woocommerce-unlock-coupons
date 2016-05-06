@@ -17,6 +17,13 @@ cada um dos seus apoiadores.
 
 == Changelog ==
 
+= 0.2 =
+
+* Melhor detecção de cupons ja existentes
+* Porcentagem do valor customizável
+* Data de expiração de 1 mês para cada cupon
+* Plugin para download de cupons (em separado)
+
 = 0.1 =
 
 * Primeira versão, geração simples de cupons

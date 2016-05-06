@@ -5,7 +5,7 @@
  * Description: Recompensando seus apoiadores Unlock com produtos na sua loja
  * Author: Lucas Fialho Zawacki
  * Author URI: https://github.com/lfzawacki/woocommerce-unlock-coupons
- * Version: 0.1
+ * Version: 0.2
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
