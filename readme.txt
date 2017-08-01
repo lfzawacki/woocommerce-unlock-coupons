@@ -27,3 +27,10 @@ cada um dos seus apoiadores.
 = 0.1 =
 
 * Primeira versão, geração simples de cupons
+
+
+=== Notice: Not really complete and not really documented ===
+
+Really no intention of doing anything with this, take it as is.
+
+If you're interested in this code ask me questions in the issues.
